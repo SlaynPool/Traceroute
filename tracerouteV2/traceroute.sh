@@ -9,7 +9,8 @@ do
 		for opt in "${!option[@]}"
 		do
 			echo $opt
-			if traceroute -n -A -f $t -m $t ${option[opt]} $i| tail -n 1 | cut -d " " -f 3-4| grep  "*"
+			traceroute -n -A -f $t -m $t ${option[opt]} $i |tail -n 1 |awk '{print $2" "$3}'
+			if traceroute -n -A -f $t -m $t ${option[opt]} $i| tail -n 1 |awk '{print $2" "$3}'| grep  "* * *"
 			then 
 				echo "option utilisé: ${option[opt]} TTL: $t"
 				if [ $opt -eq 5 ]
