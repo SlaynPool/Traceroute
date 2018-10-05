@@ -29,13 +29,21 @@ do
 		oldIP=$ip
 		ip="$(echo $ligne)"
 		echo $ip
+		
 		echo -e "\"""$oldIP""\"" "->""\"""$ip""\"""[color=purple, arrowsize=0]"  ";">>map.dot
+		
+		
 		echo -e "\"""$oldIP""\"""-> ""\"""$ip""\"""[color=purple, arrowsize=0]"";"
 		echo -e "\"""$ip""\"""[shape=box, color=${color[nc]}, fontcolor=white, style=filled]"";">>map.dot
 
 	fi
 	done< $i
 	nc=$((nc+1))
+	oldIp="$(sudo ifconfig enp3s0 | grep inet |awk '{ print $2}'|head -n1)"
+
+	oldIp="$(echo "$oldIp" "[*]")" 
+	temoin=0
+
 done
 
 
