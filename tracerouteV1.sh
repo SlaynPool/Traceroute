@@ -1,4 +1,5 @@
 #!/bin/bash 
+#obsolète
 
 max_TTL=(1 2 3 4 5 6 7 8 9 10 11 12 13 14)
 declare -a liste_Proto=( "-I" "-T" "-U" )

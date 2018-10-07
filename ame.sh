@@ -1,4 +1,5 @@
 #!/bin/bash 
+#obsolète
 declare -a max_TTL=(1)
 taille=$(traceroute -n -I $1|tail -n 1 |cut -c1-2 )
 echo $taille

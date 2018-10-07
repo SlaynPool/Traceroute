@@ -1,4 +1,6 @@
 #!/bin/bash 
+#obsolète
+
 echo "digraph G{" > test.xdot
 
 while read ligne

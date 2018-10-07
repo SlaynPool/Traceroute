@@ -1,4 +1,6 @@
 #/bin/bash
+#obsolète
+
 echo "digraph map{">>map.dot
 oldIp="$(sudo ifconfig enp3s0 | grep inet |awk '{ print $2}'|head -n1)"
 oldIp="$(echo "$oldIp" "[*]")" 
