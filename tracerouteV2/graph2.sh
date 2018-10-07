@@ -15,7 +15,8 @@ nc=0
 ############################################################################## 
 for i in "$@"
 do
-	echo $1
+	echo -e "\"""$i""\"""[label="\""$i"\"", fontcolor=white, color=${color[nc]}, style=filled]">>map.dot
+	
 	while read ligne
 	do 
 #Premier Ligne
@@ -26,14 +27,14 @@ do
 		echo $ip
 		echo -e "\"""$oldIp""\"""->""\"""$ip""\"""[color=purple arrowsize=0]"  ";" >>map.dot 
 		echo -e "\"""$oldIp""\"""[shape=box, color=${color[nc]}, fontcolor=white, style=filled]"";">>map.dot
-		echo -e "\"""$ip""\"""[shape=box, color=${color[nc]}, fontcolor=white, style=filled ]"";">>map.dot
+		echo -e "\"""$ip""\"""[shape=box, color=${color[nc]}, fontcolor=white, style=filled]"";">>map.dot
 		temoin=1
 	else
 		oldIP=$ip
 		ip=$ligne
 	#echo $ip
 	
-		echo -e "\"""$oldIP""\"" "->""\"""$ip""\"""[color=purple, arrowsize=0]"  ";">>map.dot
+		echo -e "\"""$oldIP""\"" "->""\"""$ip""\"""[color=purple, arrowsize=0]"";">>map.dot
 	
 	
 	#echo -e "\"""$oldIP""\"""-> ""\"""$ip""\"""[color=purple, arrowsize=0]"";"
