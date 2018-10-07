@@ -1,16 +1,18 @@
 #/bin/bash
 echo "digraph map{">>map.dot
 oldIp="$(sudo ifconfig enp3s0 | grep inet |awk '{ print $2}'|head -n1)"
-oldIp="$(echo "10.213.0.0" "[*]")" 
+oldIp="$(echo "$oldIp" "[*]")" 
 declare -a color=("black" "brown" "red" "orange" "yellow" "green" "blue" "purple" "grey" "white" "gold" "silver")
 temoin=0
 nc=0
+#############Pour Lier Les addresses a leurs AS###############################
 #while read ligne 
 #do 
 #ip="$(echo $ligne |cut -d " " -f 1)"
 #as="$(echo $ligne |cut -d " " -f 2)"
 #echo -e "\""$ip"\"" "->" "\""$as"\"" ";">>map.dot 
 #done< route.txt
+############################################################################## 
 for i in "$@"
 do
 	echo $1

@@ -4,7 +4,7 @@ id=O
 for i in "$@"
 do
 	#Methode pour recuperer le nombre de saut max
-	max_TTL=$(traceroute -n -I $i| tail -n 1| cut -c1-2)*
+	max_TTL=$(traceroute -n -I $i| tail -n 1| cut -c1-2)
 	#Liste des options du traceroute, ON PEUT EN RAJOUTER A SOUHAIT
 	declare -a option=("-T -p 22" "-T -p 53" "-T -p 1" "-T -p 7" "-U -p 7" "-T -p 80")
 	#id=0
@@ -17,10 +17,10 @@ do
 			echo $opt
 			#On fait notre traceroute, en fonction du TTL (Defini par la 1er boucle, et des options definis par la 2eme boucle et on recupère l'addresse IP et le numero D'AS
 			val=$(traceroute -n -A -f $t -m $t ${option[opt]} $i |tail -n 1 |awk '{print $2" "$3}')
-			#echo ($val)
+			echo "$val"
 			#if traceroute -n -A -f $t -m $t ${option[opt]} $i| tail -n 1 |awk '{print $2}'| grep  "*"
 			#Si l'on a des etoiles Syntaxe importante car si il y a * bash peux avoir la manie d'interpreter echo * au lieux de echo "*"
-			if echo "$val"| grep -F "* * *"
+			if echo "$val"|awk '{print $1}'| grep "*"
 			then 
 				echo "option utilisé: ${option[opt]} TTL: $t"
 				if [ $opt -eq 5 ]
@@ -31,36 +31,34 @@ do
 					break
 				fi
 			else
-				#traceroute -A -n -f $t -m $t ${option[opt]} $1| tail -n 1 | cut -d " " -f 3-6 >> route.txt
-				#traceroute -A -n -f $t -m $t ${option[opt]} $i|tail -n 1 |awk '{print $2" "$3}'>> "$i.txt"
 				#Si on trouve on ecrit le resultat dans le fichier de la forme "argument.txt"
-				echo $val >> "$i.txt"
+				echo "$val" >> "$i.txt"
 				break
 			fi
 		done
 	done
 done
 #lance la creation du graph a la fin du script.
-echo "Voulez-vous crée le graph xdot ?[yes-no]"
-select ask in yes no 
-	do
-	case $ask in 
-	"yes"|"no") break;;
-	*) continue;;
-	esac
-done
-arg=""
+#echo "Voulez-vous crée le graph xdot ?[yes-no]"
+#select ask in "yes" "no" 
+#	do
+#	case $ask in 
+#	"yes"|"no") break;;
+#	*) continue;;
+#	esac
+#done
+#arg=""
 
-if $ask = yes
-then
-	for i in "$@"
-	do
-		arg="$arg"" ""$i"
-	done
-	./graph2 $arg
-else
-	break
-fi
+#if "$ask" = "yes"
+#then
+#	for i in "$@"
+#	do
+#		arg="$arg"" ""$i"
+#	done
+#	./graph2 $arg
+#else
+#	exit
+#fi
 
 
 
