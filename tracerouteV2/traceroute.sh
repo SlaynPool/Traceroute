@@ -39,7 +39,12 @@ do
 		done
 	done
 done
+
+#Zbeub <3
+
 #lance la creation du graph a la fin du script.
+
+
 echo "Voulez-vous crée le graph xdot ?[yes-no]"
 read $ask
 if echo "$ask" = "yes"
