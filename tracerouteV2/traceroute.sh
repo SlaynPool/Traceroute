@@ -1,4 +1,7 @@
 #!/bin/bash 
+
+###eeee####
+
 id=O
 #Boucle pour faire le traceroute en direction de plusieurs machines
 for i in "$@"
